@@ -10,6 +10,7 @@
                     <tr>
                         <th scope="col">Groupe</th>
                         <th scope="col">Nom du concert</th>
+                        <th scope="col">Lieu</th>
                         <th scope="col">Date</th>
                         <th scope="col" colspan="2">Action</th>
                     </tr>
@@ -17,12 +18,21 @@
                 <tbody>
                     {% for concert in concerts %}
                         <tr>
-                            <td scope="row">{{ concert.mainBand.name }}</td>
+                            <td scope="row">
+                                <a href="/symf/index.php/band/{{ concert.mainBand.id }}">
+                                    {{ concert.mainBand.name }}
+                                </a>
+                            </td>
                             <td>
                                 <a href="/symf/index.php/concert/{{ concert.id }}">
-                                    {{ concert.name }}</td>
+                                    {{ concert.name }}
                                 </a>
-                            <td>{{ concert.date|date("d/m/Y") }}</td>
+                            </td>
+                            <td>
+                                {{ concert.concertHall.name }}
+                            </td>
+                            <td>
+                                {{ concert.date|date("d/m/Y") }}</td>
                             <td>
                                 <a href="/symf/index.php/concert/edit/{{ concert.id }}">
                                     <button class="btn, btn-primary">Update</button>
@@ -56,18 +66,26 @@
                             <th scope="col">Groupe</th>
                             <th scope="col">Nom du concert</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Lieu</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for concert in concerts %}
                             <tr>
-                                <td scope="row">{{ concert.mainBand.name }}</td>
+                                <td scope="row">
+                                    <a href="/symf/index.php/band/{{ concert.mainBand.id }}">
+                                        {{ concert.mainBand.name }}
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="/symf/index.php/concert/{{ concert.id }}">
                                         {{ concert.name }}
                                     </a>
                                 </td>
                                 <td>{{ concert.date|date("d/m/Y") }}</td>
+                                <td>
+                                    {{ concert.concertHall.name }}
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

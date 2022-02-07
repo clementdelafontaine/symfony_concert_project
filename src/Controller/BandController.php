@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Band;
 use App\Form\BandType;
 use App\Repository\BandRepository;
+use App\Repository\ConcertRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -117,13 +118,19 @@ class BandController extends AbstractController
     /**
      * @Route("/band/{id}", name="band")
      */
-    public function band(int $id, BandRepository $bandRepository): Response
+    public function band(int $id, BandRepository $bandRepository, ConcertRepository $concertRepository): Response
     {   
         if ($bandRepository->find($id) != null) {
             $band = $bandRepository->find($id);
         }
+
+        if ($concertRepository->findAllAfterTodayById($id) != null) {
+            $concerts = $concertRepository->findAllAfterTodayById($id);
+        }
+
         return $this->render('band/show.html.twig', [
             'band' => $band,
+            'concerts' => $concerts
         ]);
     }
 }

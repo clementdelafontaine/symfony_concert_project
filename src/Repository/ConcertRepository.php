@@ -60,4 +60,22 @@ class ConcertRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findAllAfterTodayById($id): ?array
+    {
+        $currentDate = date_create();
+        $currentDate->format('Y-m-d');
+
+        return $this->createQueryBuilder('c')
+            ->orWhere('c.mainBand = :id')
+            ->orWhere('c.openingBand = :id')
+            ->andWhere('c.date >= :val')
+            ->setParameter('val', $currentDate)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 }

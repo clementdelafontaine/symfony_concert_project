@@ -3,7 +3,7 @@
 {% block title %}{{ band.name }}{% endblock %}
 
 {% block body %}
-<div class="container px-4 px-lg-5">
+        <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
                 <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="/symf/pictures/bands/{{ band.picture }}" alt="{{ band.picture }}"></div>
@@ -12,7 +12,7 @@
                     <p>{{ band.info }}</p>
                 </div>
             </div>
-            <!-- Call to Action-->
+            <!-- Title-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
                 <div class="card-body"><h2 class="text-white m-0">Membres du groupes</h2></div>
             </div>
@@ -26,6 +26,25 @@
                                 <img class="img-fluid rounded mb-4 mb-lg-0" src="/symf/pictures/artists/{{ artist.picture }}" alt="{{ artist.picture }}">
                             </div>
                             <div class="card-footer"><a class="btn btn-primary btn-sm" href="/symf/index.php/artist/{{ artist.id }}">More Info</a></div>
+                        </div>
+                    </div>  
+                {% endfor %}                
+            </div>
+            <!-- Title-->
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <div class="card-body"><h2 class="text-white m-0">Concerts à venir</h2></div>
+            </div>
+            <!-- Content Row-->
+            <div class="row gx-4 gx-lg-5">
+                {% for concert in concerts %}
+                    <div class="col-md-4 mb-5">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ concert.name }}</h2>
+                                <p>Coming on {{ concert.date|date("d/m/Y") }}</p>
+                                <img class="img-fluid rounded mb-4 mb-lg-0" src="/symf/pictures/concerts/{{ concert.poster }}" alt="{{ concert.poster }}">
+                            </div>
+                            <div class="card-footer"><a class="btn btn-primary btn-sm" href="/symf/index.php/concert/{{ concert.id }}">More Info</a></div>
                         </div>
                     </div>  
                 {% endfor %}                
