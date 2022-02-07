@@ -3,42 +3,75 @@
 {% block title %}Liste des concerts{% endblock %}
 
 {% block body %}
-    <div class="container m-3">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Groupe</th>
-                    <th scope="col">Nom du concert</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for concert in concerts %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="container m-3">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td scope="row">{{ concert.mainBand.name }}</td>
-                        <td>{{ concert.name }}</td>
-                        <td>{{ concert.date|date("d/m/Y") }}</td>
-                        <td>
-                            <a href="/symf/index.php/concert/edit/{{ concert.id }}">
-                                <button class="btn, btn-primary">Update</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="/symf/index.php/concert/delete/{{ concert.id }}">
-                                <button class="btn, btn-danger">Supprimer</button>
-                            </a>
-                        </td>
+                        <th scope="col">Groupe</th>
+                        <th scope="col">Nom du concert</th>
+                        <th scope="col">Date</th>
+                        <th scope="col" colspan="2">Action</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div>
-            <a href="{{ path('concert_create') }}">Créer un nouveau concert</a>
-            {% if success %}
-                <p><strong>Votre ajout a bien été pris en compte.</strong></p>
-            {% endif %}
-        </div>
+                </thead>
+                <tbody>
+                    {% for concert in concerts %}
+                        <tr>
+                            <td scope="row">{{ concert.mainBand.name }}</td>
+                            <td>
+                                <a href="/symf/index.php/concert/{{ concert.id }}">
+                                    {{ concert.name }}</td>
+                                </a>
+                            <td>{{ concert.date|date("d/m/Y") }}</td>
+                            <td>
+                                <a href="/symf/index.php/concert/edit/{{ concert.id }}">
+                                    <button class="btn, btn-primary">Update</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/symf/index.php/concert/delete/{{ concert.id }}">
+                                    <button class="btn, btn-danger">Supprimer</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <a href="{{ path('concert_create') }}">Créer un nouveau concert</a>
+                {% if success %}
+                    <p><strong>Votre ajout a bien été pris en compte.</strong></p>
+                {% endif %}
+            </div>
+        {% else %}
+
+            <div class="container mt-2">
+                            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Groupe</th>
+                        <th scope="col">Nom du concert</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for concert in concerts %}
+                        <tr>
+                            <td scope="row">{{ concert.mainBand.name }}</td>
+                            <td>
+                                <a href="/symf/index.php/concert/{{ concert.id }}">
+                                    {{ concert.name }}
+                                </a>
+                            </td>
+                            <td>{{ concert.date|date("d/m/Y") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+
+        {% endif %}
+
 
     </div>
 {% endblock %}

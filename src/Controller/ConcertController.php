@@ -74,6 +74,7 @@ class ConcertController extends AbstractController
 
     /**
      * @Route("/concert/delete/{id}", name="concert_delete")
+     * @isGranted("ROLE_ADMIN")
      */
     public function delete(Request  $request, Concert $concert, EntityManagerInterface $entityManager): Response
     {
@@ -85,6 +86,7 @@ class ConcertController extends AbstractController
 
     /**
      * @Route("/concert/edit/{id}", name="concert_edit")
+     * @isGranted("ROLE_ADMIN")
      */
     public function edit(int $id, Request $request, EntityManagerInterface $entityManager, ConcertRepository $concertRepository): Response
     {

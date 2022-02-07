@@ -4,20 +4,59 @@
 
 {% block body %}
 
-    <div class="container mt-2">
-        <div class="row">
-            {% for band in bands_list %}
-            <div class="col-md-3 col-sm-6">
-                <div class="card card-block">  
-                    <a href="band/{{ band.id }}">
-                        <img src="../pictures/bands/{{ band.picture }}" alt="Photo de {{ band.name }}" class="card-img-top">
-                        <h5 class="card-title mt-3 mb-3">{{ band.name }}</h5>
-                        <p class="card-text"></p> 
-                    </a>
-                </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="container m-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Groupe</th>
+                        <th scope="col" colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for band in bands_list %}
+                        <tr>
+                            <td>
+                                <a href="band/{{ band.id }}">
+                                    {{ band.name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/symf/index.php/band/edit/{{ band.id }}">
+                                    <button class="btn, btn-primary">Update</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/symf/index.php/band/delete/{{ band.id }}">
+                                    <button class="btn, btn-danger">Supprimer</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <a href="{{ path('band_create') }}">Créer un nouveau groupe</a>
+                {% if success %}
+                    <p><strong>Votre ajout a bien été pris en compte.</strong></p>
+                {% endif %}
             </div>
-            {% endfor %}
+    {% else %}
+        <div class="container mt-2">
+            <div class="row">
+                {% for band in bands_list %}
+                <div class="col-md-3 col-sm-6">
+                    <div class="card card-block">  
+                        <a href="band/{{ band.id }}">
+                            <img src="../pictures/bands/{{ band.picture }}" alt="Photo de {{ band.name }}" class="card-img-top">
+                            <h5 class="card-title mt-3 mb-3">{{ band.name }}</h5>
+                            <p class="card-text"></p> 
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
+    {% endif %}
 
 {% endblock %}

@@ -22,12 +22,18 @@
         <li class="nav-item">
           <a class="nav-link mx-2" href="/symf/index.php/bands">Artistes</a>
         </li>
-        <li class="nav-item ms-3">
-          <a class="btn btn-black btn-rounded" href="/symf/index.php/login">Sign in</a>
-        </li>
-        <li class="nav-item ms-3">
-          <a class="btn btn-black btn-rounded" href="/symf/index.php/register">Crée un compte</a>
-        </li>
+        {% if app.user %}
+          <div class="nav-item ms-3">
+              Bonjour {{ app.user.username }} ({{ app.user.roles.0 }}), <a href="{{ path('app_logout') }}">Logout</a>
+          </div>
+        {% else %}
+          <li class="nav-item ms-3">
+            <a class="btn btn-black btn-rounded" href="/symf/index.php/login">Sign in</a>
+          </li>
+          <li class="nav-item ms-3">
+            <a class="btn btn-black btn-rounded" href="/symf/index.php/register">Crée un compte</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </div>
