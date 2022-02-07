@@ -56,16 +56,6 @@ class ConcertHall
      */
     private $concert;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Date::class, mappedBy="concertHall")
-     */
-    private $dates;
-
-    public function __construct()
-    {
-        $this->dates = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -135,36 +125,4 @@ class ConcertHall
 
         return $this;
     }
-
-    /**
-     * @return Collection|Date[]
-     */
-    public function getDates(): Collection
-    {
-        return $this->dates;
-    }
-
-    public function addDate(Date $date): self
-    {
-        if (!$this->dates->contains($date)) {
-            $this->dates[] = $date;
-            $date->setConcertHall($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDate(Date $date): self
-    {
-        if ($this->dates->removeElement($date)) {
-            // set the owning side to null (unless already changed)
-            if ($date->getConcertHall() === $this) {
-                $date->setConcertHall(null);
-            }
-        }
-
-        return $this;
-    }
-
-
 }

@@ -30,7 +30,7 @@ class ConcertHallRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
-            ->getQuery()
+            ->getQuery() // dump ici pour afficher la requête sql
             ->getResult()
         ;
     }

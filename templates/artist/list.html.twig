@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artistes{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-2">
+        <div class="row">
+            {% for artist in artists_list %}
+            <div class="col-md-3 col-sm-6">
+                <div class="card card-block">  
+                    <a href="artist/{{ artist.id }}">
+                        <img src="../pictures/artists/{{ artist.picture }}" alt="Photo de {{ artist.name }}" class="card-img-top">
+                        <h5 class="card-title mt-3 mb-3">{{ artist.name }}</h5>
+                        <p class="card-text"></p> 
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

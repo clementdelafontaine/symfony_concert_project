@@ -22,19 +22,19 @@ class BandRepository extends ServiceEntityRepository
     // /**
     //  * @return Band[] Returns an array of Band objects
     //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    
+    // public function findByArtistId($id)
+    // {
+    //     return $this->createQueryBuilder('b')
+    //         ->join('b.artists', 'a')
+    //         ->andWhere('a.id = :val')
+    //         ->setParameter('val', $id)
+    //         ->orderBy('b.id', 'ASC')
+    //         ->getQuery()
+    //         ->getResult()
+    //     ;
+    // }
+    
 
     /*
     public function findOneBySomeField($value): ?Band

@@ -141,24 +141,4 @@ class Management
         return $this->concerts;
     }
 
-    public function addConcert(Concert $concert): self
-    {
-        if (!$this->concerts->contains($concert)) {
-            $this->concerts[] = $concert;
-            $concert->addManagement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeConcert(Concert $concert): self
-    {
-        if ($this->concerts->removeElement($concert)) {
-            $concert->removeManagement($this);
-        }
-
-        return $this;
-    }
-
-
 }

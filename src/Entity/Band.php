@@ -52,9 +52,9 @@ class Band
     private $info = 'NULL';
 
     /**
-     * @ORM\ManyToMany(targetEntity=artist::class, inversedBy="bands")
+     * @ORM\ManyToMany(targetEntity=Artist::class, inversedBy="bands")
      */
-    private $artists;
+    private $Artists;
 
     /**
      * @ORM\OneToMany(targetEntity=Concert::class, mappedBy="openingBand")
@@ -68,7 +68,7 @@ class Band
 
     public function __construct()
     {
-        $this->artists = new ArrayCollection();
+        $this->Artists = new ArrayCollection();
         $this->concerts = new ArrayCollection();
         $this->concertsAsMain = new ArrayCollection();
     }
@@ -127,25 +127,25 @@ class Band
     }
 
     /**
-     * @return Collection|artist[]
+     * @return Collection|Artist[]
      */
     public function getArtists(): Collection
     {
-        return $this->artists;
+        return $this->Artists;
     }
 
-    public function addArtist(artist $artist): self
+    public function addArtist(Artist $Artist): self
     {
-        if (!$this->artists->contains($artist)) {
-            $this->artists[] = $artist;
+        if (!$this->Artists->contains($Artist)) {
+            $this->Artists[] = $Artist;
         }
 
         return $this;
     }
 
-    public function removeArtist(artist $artist): self
+    public function removeArtist(Artist $Artist): self
     {
-        $this->artists->removeElement($artist);
+        $this->Artists->removeElement($Artist);
 
         return $this;
     }

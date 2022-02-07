@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,43 +36,40 @@ class Concert
     private $poster = 'NULL';
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="info", type="string", length=255, nullable=true, options={"default"="NULL"})
-     */
-    private $info = 'NULL';
-
-    /**
      * @ORM\OneToOne(targetEntity=ConcertHall::class, inversedBy="concert", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $concertHall;
 
     /**
-     * @ORM\ManyToOne(targetEntity=band::class, inversedBy="concerts")
+     * @ORM\ManyToOne(targetEntity=Band::class, inversedBy="concerts")
      */
     private $openingBand;
 
     /**
-     * @ORM\ManyToOne(targetEntity=band::class, inversedBy="concertsAsMain")
+     * @ORM\ManyToOne(targetEntity=Band::class, inversedBy="concertsAsMain")
      * @ORM\JoinColumn(nullable=false)
      */
     private $mainBand;
 
     /**
-     * @ORM\ManyToMany(targetEntity=management::class, inversedBy="concerts")
+     * @ORM\ManyToOne(targetEntity=Management::class, inversedBy="concerts")
      */
     private $management;
 
     /**
-     * @ORM\OneToMany(targetEntity=Date::class, mappedBy="concert")
+     * @ORM\Column(type="datetime")
      */
-    private $dates;
+    private $date;
+
+    /**
+     * @ORM\Column(type="string", length=1024, nullable=true)
+     */
+    private $info;
 
     public function __construct()
     {
-        $this->management = new ArrayCollection();
-        $this->dates = new ArrayCollection();
+        $this->management = new Management();
     }
 
     public function getId(): ?int
@@ -102,18 +97,6 @@ class Concert
     public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
-
-        return $this;
-    }
-
-    public function getInfo(): ?string
-    {
-        return $this->info;
-    }
-
-    public function setInfo(?string $info): self
-    {
-        $this->info = $info;
 
         return $this;
     }
@@ -155,55 +138,40 @@ class Concert
     }
 
     /**
-     * @return Collection|management[]
+     * @return Management
      */
-    public function getManagement(): Collection
+    public function getManagement(): Management
     {
         return $this->management;
     }
 
-    public function addManagement(management $management): self
+    public function setManagement(?Management $management): self
     {
-        if (!$this->management->contains($management)) {
-            $this->management[] = $management;
-        }
+        $this->management = $management;
 
         return $this;
     }
 
-    public function removeManagement(management $management): self
+    public function getDate(): ?\DateTimeInterface
     {
-        $this->management->removeElement($management);
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Date[]
-     */
-    public function getDates(): Collection
+    public function getInfo(): ?string
     {
-        return $this->dates;
+        return $this->info;
     }
 
-    public function addDate(Date $date): self
+    public function setInfo(?string $info): self
     {
-        if (!$this->dates->contains($date)) {
-            $this->dates[] = $date;
-            $date->setConcert($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDate(Date $date): self
-    {
-        if ($this->dates->removeElement($date)) {
-            // set the owning side to null (unless already changed)
-            if ($date->getConcert() === $this) {
-                $date->setConcert(null);
-            }
-        }
+        $this->info = $info;
 
         return $this;
     }

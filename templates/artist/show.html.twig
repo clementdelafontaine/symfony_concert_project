@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ artist.name }}{% endblock %}
+
+{% block body %}
+<div class="container px-4 px-lg-5">
+            <!-- Heading Row-->
+            <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="/symf/pictures/artists/{{ artist.picture }}" alt="{{ artist.picture }}"></div>
+                <div class="col-lg-5">
+                    <h1 class="font-weight-light">{{ artist.name }}</h1>
+                    <p>{{ artist.info }}</p>
+                </div>
+            </div>
+            <!-- Call to Action-->
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <div class="card-body"><h2 class="text-white m-0">Groupes dans le(s)quel(s) {{ artist.name }} joue </h2></div>
+            </div>
+            <!-- Content Row-->
+            {# <div class="row gx-4 gx-lg-5"> 
+                {% for band in artist.bands %}
+                    <div class="col-md-4 mb-5">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ band.name }}</h2>
+                                <img class="img-fluid rounded mb-4 mb-lg-0" src="/symf/pictures/artists/{{ band.picture }}" alt="{{ band.picture }}">
+                            </div>
+                            <div class="card-footer"><a class="btn btn-primary btn-sm" href="/symf/index.php/band/{{ band.id }}">More Info</a></div>
+                        </div>
+                    </div>  
+                {% endfor %}                
+            </div> #}
+        </div>
+
+
+{% endblock %}
