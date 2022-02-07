@@ -42,6 +42,9 @@ class ConcertType extends AbstractType
             ->add('mainBand', EntityType::class,
                 ['class' => Band::class,
                 'choice_label' => 'name'])
+            ->add('management', EntityType::class,
+                ['class' => Management::class,
+                'choice_label' => 'name'])
             ->add('save', SubmitType::class, [
                 'attr' => ['class' => 'Valider btn btn-primary'],
             ])

@@ -47,4 +47,17 @@ class ConcertRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllAfterToday(): ?array
+    {
+        $currentDate = date_create();
+        $currentDate->format('Y-m-d');
+
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.date >= :val')
+            ->setParameter('val', $currentDate)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

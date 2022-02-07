@@ -43,31 +43,35 @@
                     <p><strong>Votre ajout a bien été pris en compte.</strong></p>
                 {% endif %}
             </div>
-        {% else %}
-
-            <div class="container mt-2">
-                            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Groupe</th>
-                        <th scope="col">Nom du concert</th>
-                        <th scope="col">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for concert in concerts %}
+        {% else %}                      
+            {% if app.request.get('_route') == 'index' %}
+            <div class="container mb-2">   
+                <h1>Concerts à venir</h1>
+            </div>
+            {% endif %}
+            <div class="container mt-2">      
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td scope="row">{{ concert.mainBand.name }}</td>
-                            <td>
-                                <a href="/symf/index.php/concert/{{ concert.id }}">
-                                    {{ concert.name }}
-                                </a>
-                            </td>
-                            <td>{{ concert.date|date("d/m/Y") }}</td>
+                            <th scope="col">Groupe</th>
+                            <th scope="col">Nom du concert</th>
+                            <th scope="col">Date</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for concert in concerts %}
+                            <tr>
+                                <td scope="row">{{ concert.mainBand.name }}</td>
+                                <td>
+                                    <a href="/symf/index.php/concert/{{ concert.id }}">
+                                        {{ concert.name }}
+                                    </a>
+                                </td>
+                                <td>{{ concert.date|date("d/m/Y") }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
 
         {% endif %}

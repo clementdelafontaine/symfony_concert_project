@@ -53,7 +53,7 @@ class Concert
     private $mainBand;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Management::class, inversedBy="concerts")
+     * @ORM\ManyToOne(targetEntity=Management::class, inversedBy="concertsAsMain")
      */
     private $management;
 
@@ -66,11 +66,6 @@ class Concert
      * @ORM\Column(type="string", length=1024, nullable=true)
      */
     private $info;
-
-    public function __construct()
-    {
-        $this->management = new Management();
-    }
 
     public function getId(): ?int
     {
@@ -113,34 +108,31 @@ class Concert
         return $this;
     }
 
-    public function getOpeningBand(): ?band
+    public function getOpeningBand(): ?Band
     {
         return $this->openingBand;
     }
 
-    public function setOpeningBand(?band $openingBand): self
+    public function setOpeningBand(?Band $openingBand): self
     {
         $this->openingBand = $openingBand;
 
         return $this;
     }
 
-    public function getMainBand(): ?band
+    public function getMainBand(): ?Band
     {
         return $this->mainBand;
     }
 
-    public function setMainBand(?band $mainBand): self
+    public function setMainBand(?Band $mainBand): self
     {
         $this->mainBand = $mainBand;
 
         return $this;
     }
 
-    /**
-     * @return Management
-     */
-    public function getManagement(): Management
+    public function getManagement(): ?Management
     {
         return $this->management;
     }

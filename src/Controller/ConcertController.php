@@ -17,11 +17,26 @@ class ConcertController extends AbstractController
 {
     /**
      * @Route("/concert", name="concerts_list")
+     * 
      */
     public function concert(ConcertRepository $concertRepository): Response
     {
         if ($concertRepository->findAll() != null) {
             $concerts = $concertRepository->findAll();
+        }
+        return $this->render('concert/list.html.twig', [
+            'concerts' => $concerts,
+            'success' => false,
+        ]);
+    }
+
+    /**
+     * @Route("/", name="index")
+     */
+    public function concertIndex(ConcertRepository $concertRepository): Response
+    {
+        if ($concertRepository->findAll() != null) {
+            $concerts = $concertRepository->findAllAfterToday();
         }
         return $this->render('concert/list.html.twig', [
             'concerts' => $concerts,

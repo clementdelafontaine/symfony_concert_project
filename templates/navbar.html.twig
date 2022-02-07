@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
   <div class="container">
-    <a class="navbar-brand" href="#"
+    <a class="navbar-brand" href="/symf/index.php/"
       ><h1>Salle de concert</h1></a>
     <button
       class="navbar-toggler"
@@ -24,7 +24,7 @@
         </li>
         {% if app.user %}
           <div class="nav-item ms-3">
-              Bonjour {{ app.user.username }} ({{ app.user.roles.0 }}), <a href="{{ path('app_logout') }}">Logout</a>
+              Bonjour {{ app.user.username }} ({{ app.user.roles.0|replace({'ROLE_': ''})|lower }}), <a href="{{ path('app_logout') }}">Logout</a>
           </div>
         {% else %}
           <li class="nav-item ms-3">
