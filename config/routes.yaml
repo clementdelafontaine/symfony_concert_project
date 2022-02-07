@@ -1,6 +1,8 @@
 # index:
 #    path: /
-#    controller: App\Controller\DefaultController::index
+#    controller: App\Controller\
 # concert:
 #   resource: '../src/Controller/ConcertController.php'
-  
+app_logout:
+  path: 'concerts_list'
+  controller: App\Controller\ConcertController.php
